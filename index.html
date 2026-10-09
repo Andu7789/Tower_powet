@@ -677,7 +677,7 @@ function callWave() {
 function spawnEnemy(type, wave, pathIdx, d = 0, parent = null) {
   const b = ET[type], hpMul = hpScale(wave) * (G.diff.hp > 1 ? 1 + (G.diff.hp - 1) * Math.min(1, wave / 15) : G.diff.hp) * (G.endless && wave > FINAL_WAVE ? Math.pow(1.04, wave - FINAL_WAVE) : 1);
   const e = {
-    type, b, wave, path: G.map.paths[pathIdx], pathIdx, d, x: 0, y: 0, hx: 0, hy: 1,
+    type, b, wave, path: G.map.paths[pathIdx], pathIdx, d, x: 0, y: 0, hx: 0, hy: 1, r: b.r,
     hp: b.hp * hpMul, maxHp: b.hp * hpMul, speed: b.speed * rand(.96, 1.04), armor: (b.armor || 0) * (1 + wave * .02),
     slowT: 0, slowF: 0, stunT: 0, brittleT: 0, flash: 0, alive: true, cloaked: false, cloakT: rand(1, 2.5),
     healT: 1.5, spawnT: 5, bounty: Math.max(1, Math.round(b.bounty * .62 * (1 + .02 * (wave - 1)))), wob: rand(0, TAU)

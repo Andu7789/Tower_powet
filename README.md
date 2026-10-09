@@ -41,6 +41,13 @@ Grunts, fast Scouts, flying Wisps (Mortars can't hit them), armored Brutes, Spli
 
 Sound is synthesised live with WebAudio (no audio files), and haptics use the Android vibration API.
 
+## Testing
+`tests/smoke.js` loads the game in headless Chromium and checks that every tower and specialisation deals damage, that enemies are actually drawn, and that the page throws no errors:
+
+```
+NODE_PATH=$(npm root -g) node tests/smoke.js
+```
+
 ## Ideas for next versions
 - Persistent meta progression: earn crystals per run and unlock tower perks
 - More maps, including a map editor and shareable map codes
