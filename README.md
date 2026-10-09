@@ -36,7 +36,8 @@ Grunts, fast Scouts, flying Wisps (Mortars can't hit them), armored Brutes, Spli
 - **Call waves early** for bonus gold. Banked gold earns **5% interest** (max 30) when a wave is cleared.
 - **Abilities:** a Meteor strike you aim yourself, and Time Freeze.
 - Selling refunds 100% if the tower hasn't seen a wave yet, otherwise 70%.
-- 1×/2×/3× speed and auto-start waves.
+- Waves start on a countdown (30s before wave 1, 20s between waves), or tap Start wave to go early. AUTO shortens the gap to 3s.
+- 1×/2×/3× speed.
 
 Sound is synthesised live with WebAudio (no audio files), and haptics use the Android vibration API.
 
