@@ -48,6 +48,12 @@ Sound is synthesised live with WebAudio (no audio files), and haptics use the An
 NODE_PATH=$(npm root -g) node tests/smoke.js
 ```
 
+`tests/balance.js` has a bot play every map on every difficulty and reports how far it gets. The bot places towers for road coverage, upgrades and uses both abilities. Balance knobs live in the `TUNE` object in `index.html`, and you can try overrides without editing it:
+
+```
+NODE_PATH=$(npm root -g) node tests/balance.js '{"hpExp":1.095}'
+```
+
 ## Ideas for next versions
 - Persistent meta progression: earn crystals per run and unlock tower perks
 - More maps, including a map editor and shareable map codes
