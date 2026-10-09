@@ -146,6 +146,37 @@ button:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
 
 @media (prefers-reduced-motion: reduce){#wave-btn.pulse{animation:none}#banner{transition:none}}
 @media (max-height:700px){#swap{height:118px}.tbtn canvas{width:34px;height:34px}}
+.tbtn .bl{display:none}
+
+/* Unfolded foldables / tablets in landscape: board left, command column right */
+@media (min-width:680px) and (min-aspect-ratio:3/4){
+  #app{display:grid;grid-template-columns:minmax(0,1fr) clamp(270px,34vw,340px);grid-template-rows:auto minmax(0,1fr)}
+  #hud{grid-column:1 / -1}
+  #stage{grid-column:1;grid-row:2}
+  #tray{grid-column:2;grid-row:2;border-top:0;border-left:1px solid var(--line);padding:12px;gap:12px;min-height:0}
+  #swap{height:auto;flex:1;min-height:0}
+  #build-row{grid-template-columns:1fr 1fr;grid-auto-rows:1fr;gap:8px}
+  .tbtn{display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto auto auto;column-gap:10px;row-gap:0;justify-items:start;align-content:center;padding:8px 10px;text-align:left}
+  .tbtn canvas{grid-row:1 / span 3;width:48px;height:48px;align-self:center}
+  .tbtn .nm{color:var(--fg);font-size:12px}
+  .tbtn .bl{display:block;font-size:10.5px;line-height:1.25;color:var(--muted);font-weight:600}
+  #sel{justify-content:flex-start;gap:12px}
+  .sel-head canvas{width:52px;height:52px}
+  .sel-title b{font-size:20px}
+  #sel-stats{font-size:13px;gap:6px 14px}
+  .sel-actions{flex-wrap:wrap;gap:8px}
+  #sel-up{flex:1 1 100%;order:-1;flex-direction:column}
+  #sel-up button{padding:12px}
+  #sel-up button small{font-size:11.5px}
+  #sel-target,#sel-sell{flex:1;padding:12px}
+  #action-row{flex-wrap:wrap;gap:8px}
+  .abtn{flex:1;height:52px}
+  #auto-btn{flex:1}
+  #wave-btn{flex:1 1 100%;min-height:58px;font-size:17px}
+  #menu .ov-card{max-width:760px}
+  #maps{grid-template-columns:repeat(4,1fr)}
+  #banner h2{font-size:40px}
+}
 </style>
 </head>
 <body>
@@ -616,7 +647,7 @@ function newGame(mapIdx, diffIdx) {
   resize();
   renderBackground();
   closeSel(); refreshTray(); updateHUD();
-  if (!store.get('tutDone', false)) setTimeout(() => toast('Pick a tower below, then tap a tile twice to build', 4200), 400);
+  if (!store.get('tutDone', false)) setTimeout(() => toast('Pick a tower, then tap a tile twice to build', 4200), 400);
 }
 
 /* ---------------- Waves ---------------- */
@@ -1269,7 +1300,7 @@ const buildRow = $('#build-row');
 for (const type of TORDER) {
   const b = TT[type], btn = document.createElement('button');
   btn.className = 'tbtn'; btn.dataset.type = type; btn.setAttribute('aria-label', b.name + ', costs ' + b.cost);
-  btn.innerHTML = `<canvas width="80" height="80"></canvas><span class="nm">${b.name}</span><span class="cost">${b.cost}</span>`;
+  btn.innerHTML = `<canvas width="80" height="80"></canvas><span class="nm">${b.name}</span><span class="bl">${b.blurb}</span><span class="cost">${b.cost}</span>`;
   drawIcon(btn.querySelector('canvas'), type);
   btn.addEventListener('click', () => {
     Sfx.init(); if (!G || G.over) return;
